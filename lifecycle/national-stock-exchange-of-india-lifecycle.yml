@@ -1,0 +1,58 @@
+generated: '2026-08-04'
+method: searched
+source: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+versioning:
+  scheme: uri-path + versioned protocol document
+  current:
+    rfq_web_api: /rest/v1/ (protocol document v1.1.10)
+    cbrics_web_api: /rest/v1/ (protocol document v1.16)
+    ofs_web_api: /api/ (protocol document v1.3.4)
+    rfq_fix_interface: FIX 5.0 SP2 / FIXT.1.1 (protocol document v1.0.2)
+    nnf_capital_market: Trimmed NNF v6.6
+    nnf_futures_options: Trimmed NNF v9.50
+    nnf_currency_derivatives: Trimmed NNF v6.3
+    nnf_commodity_derivatives: Trimmed NNF v3.5
+    mtbt: v6.9
+    egr_nnf: Trimmed NNF v1.2
+  docs: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+  note: >-
+    NSE keeps two or three prior versions of each protocol document live on the protocols page
+    alongside the current one — that overlap is the de-facto migration window. The HTTP URI version
+    has not moved off v1 even across a breaking path rename (see changelog).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    NSE publishes no deprecation policy, no Sunset/Deprecation header support (RFC 8594) and no
+    end-of-life dates for superseded protocol versions. Retirement of an older protocol version is
+    announced through the Exchange circulars channel, not through the API.
+change_communication:
+  circulars: https://www.nseindia.com/resources/exchange-communication-circulars
+  protocol_page_updated: '2026-08-03'
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No API SLA is published. NSE publishes trading-session timings, trading holidays and a live
+    market-status endpoint instead of a service-level commitment for its interfaces.
+status_page: null
+status_signals:
+  market_status_endpoint: https://www.nseindia.com/api/marketStatus
+  market_status_http: 200
+  note: >-
+    This is a market-open/closed signal consumed by the NSE website, not an API/system status page.
+    It is undocumented and behind the same Akamai bot manager that 403s the site root.
+  trading_holidays: https://www.nseindia.com/resources/exchange-communication-holidays
+deprecated_operations:
+- api: NSE RFQ Web API
+  operation: POST /v1/partisstype/all
+  replaced_by: POST /v1/partisstyp/all
+  version: 1.1.8
+  date: '2025-04-23'
+  note: Renamed in place with no versioned alias and no deprecation window documented.
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+  - {url: 'https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols', http_status: 200}
+  - {url: 'https://www.nseindia.com/api/marketStatus', http_status: 200}
+  - {url: 'https://www.nseindia.com/resources/exchange-communication-circulars', http_status: 200}

@@ -1,23 +1,131 @@
 aid: national-stock-exchange-of-india
 name: National Stock Exchange of India
-description: 'National Stock Exchange of India is a company surfaced via the API Evangelist harvest backlog
-  (source: secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: 'National Stock Exchange of India Ltd (NSE) is India''s largest stock exchange, operating
+  the Capital Market, Futures & Options, Currency Derivatives, Commodity Derivatives, Debt and
+  Electronic Gold Receipts segments, together with NSE Clearing, NSE Indices and NSE Data & Analytics
+  Ltd (formerly DotEx International). NSE exposes its trading and post-trade systems to members and
+  empanelled vendors through a published protocol surface rather than a public developer portal:
+  binary Non-NEAT Front-End (NNF) and multicast tick-by-tick (MTBT) trading protocols, a Drop Copy
+  facility, an Extranet API, a FIX 5.0 (SP2) interface for the RFQ platform, and JSON/HTTPS Web APIs
+  for the RFQ, CBRICS bond, e-IPO/ASBA, Offer-For-Sale and MFSS platforms. Every one of those
+  interfaces is documented only as a PDF or ZIP protocol document — NSE publishes no OpenAPI,
+  AsyncAPI, SDK, Postman collection or machine-readable contract of any kind. Market data itself is
+  vended commercially by NSE Data & Analytics under a subscription and data-vending agreement.'
 url: https://raw.githubusercontent.com/api-evangelist/national-stock-exchange-of-india/refs/heads/main/apis.yml
+image: https://www.nseindia.com/assets/images/NSE_Logo.svg
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-secondary-market-listing: https://www.hiive.com/securities/national-stock-exchange-of-india-stock
+x-tier: profiled
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
 - Company
-apis: []
+- Stock Exchange
+- Capital Markets
+- Market Data
+- Trading
+- Financial Services
+- Securities
+- India
+- FIX Protocol
+- Bonds
+apis:
+- name: NSE RFQ Web API
+  description: 'JSON over HTTPS Web API for the NSE Request-for-Quote (RFQ) platform for corporate
+    bonds and debt securities. Documented in the "RFQ - Protocol for Web API" PDF published on the
+    NSE trading protocols page: 41 operations across login/session, RFQ master, market watch,
+    negotiation, deal, deal amendment, participant group, participant limit and portfolio limit,
+    plus an optional participant-implemented callback API for RFQ notifications.'
+  humanURL: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+  baseURL: https://bricsonline.nseindia.com/rfq
+  tags:
+  - RFQ
+  - Bonds
+  - Debt
+  - Negotiation
+  properties:
+  - type: Documentation
+    url: https://nsearchives.nseindia.com/web/mediaattachment/2026-07/RFQ_-_Protocol_for_Web_API_-_Ver_1.1.10_20260703110148.pdf
+  - type: APIReference
+    url: https://nsearchives.nseindia.com/web/mediaattachment/2026-07/RFQ_-_Protocol_for_Web_API_-_Ver_1.1.10_20260703110148.pdf
+- name: NSE CBRICS Web API
+  description: 'JSON over HTTPS Web API for CBRICS (Corporate Bond Reporting and Integrated Clearing
+    System), NSE''s reporting and settlement platform for corporate bond trades. Documented in the
+    "WEB CBRICS PROTOCOL" PDF on the NSE trading protocols page; an API-enabled CBRICS user is the
+    prerequisite for enabling the RFQ Web API.'
+  humanURL: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+  baseURL: https://bricsonline.nseindia.com/bondsnew
+  tags:
+  - CBRICS
+  - Bonds
+  - Reporting
+  properties:
+  - type: Documentation
+    url: https://nsearchives.nseindia.com/web/mediaattachment/2026-02/WEB_CBRICS_PROTOCOL_1.16_20260216103027.pdf
+- name: NSE Offer For Sale (OFS) Web API
+  description: 'JSON over HTTPS Web API for the NSE Offer-For-Sale platform, used by members to place,
+    modify, cancel and query OFS orders and to stream market messages. Bearer access-token
+    authentication with a refresh-token endpoint; includes a server-sent message stream
+    (GET /messaging/message-stream). Documented in the "OFS-WEB API" PDF on the NSE trading
+    protocols page.'
+  humanURL: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+  baseURL: https://eofs.nseindia.com/api/
+  tags:
+  - Offer For Sale
+  - Orders
+  - Equities
+  properties:
+  - type: Documentation
+    url: https://nsearchives.nseindia.com/web/mediaattachment/2026-05/OFS-WEB_API_Ver1.3.4_20260519122437.pdf
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/national-stock-exchange-of-india-domain-security.yml
 - type: Website
-  url: https://www.hiive.com/securities/national-stock-exchange-of-india-stock
+  url: https://www.nseindia.com/
+- type: Documentation
+  url: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+- type: APIReference
+  url: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+- type: Support
+  url: https://www.nseindia.com/static/list-contact-us
+- type: Pricing
+  url: https://www.nseindia.com/static/nse-data-and-analytics/data-information-vending
+- type: TermsOfService
+  url: https://www.nseindia.com/static/nse-terms-of-use
+- type: PrivacyPolicy
+  url: https://www.nseindia.com/static/privacy-policy
+- type: ChangeLog
+  url: https://www.nseindia.com/resources/exchange-communication-circulars
+- type: ChangeLog
+  url: changelog/national-stock-exchange-of-india-changelog.yml
+- type: Authentication
+  url: authentication/national-stock-exchange-of-india-authentication.yml
+- type: Conventions
+  url: conventions/national-stock-exchange-of-india-conventions.yml
+- type: ErrorCatalog
+  url: errors/national-stock-exchange-of-india-problem-types.yml
+- type: Webhooks
+  url: asyncapi/national-stock-exchange-of-india-webhooks.yml
+- type: Sandbox
+  url: sandbox/national-stock-exchange-of-india-sandbox.yml
+- type: Lifecycle
+  url: lifecycle/national-stock-exchange-of-india-lifecycle.yml
+- type: Conformance
+  url: conformance/national-stock-exchange-of-india-conformance.yml
+- type: Packages
+  url: packages/national-stock-exchange-of-india-packages.yml
+- type: LLMsTxt
+  url: llms/national-stock-exchange-of-india-llms.txt
+x-enrichment:
+  date: '2026-08-04'
+  status: enriched
+  artifacts_added: 12
+  pass: local-v1

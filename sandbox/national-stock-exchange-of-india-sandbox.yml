@@ -1,0 +1,46 @@
+generated: '2026-08-04'
+method: searched
+source: NSE Web API and Extranet protocol documents (PDF/ZIP) at https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+docs: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+note: >-
+  NSE publishes named test/UAT environments for its Web APIs and a separate UAT protocol document
+  for the Extranet API. There is no self-service sandbox, no test API key, and no published test
+  data set — access to UAT requires an Exchange-enabled member user, and the UAT hostnames do not
+  resolve from the public internet.
+self_service: false
+test_live_separation: separate hostnames per environment
+environments:
+- api: NSE RFQ Web API
+  live: https://bricsonline.nseindia.com/rfq
+  test: https://bricsonlinereguat.nseindia.com/rfq/
+  test_label: Testing Environment (UAT)
+  source: RFQ - Protocol for Web API v1.1.10 (PDF), "Environment Details"
+- api: NSE CBRICS Web API
+  live: https://bricsonline.nseindia.com/bondsnew
+  test: https://bricsonlinereguat.nseindia.com/bondsnew
+  source: WEB CBRICS PROTOCOL v1.16 (PDF)
+- api: NSE Offer For Sale (OFS) Web API
+  live: https://eofs.nseindia.com/api/
+  test: https://eofsuat.nseindia.com/api/
+  source: OFS-WEB API v1.3.4 (PDF)
+- api: NSE Extranet API
+  live: Extranet Protocol API Version 2.0 (Production Environment)
+  test: Extranet Protocol API Version 1.0 / 2.0 (UAT Environment)
+  note: NSE publishes a distinct production and UAT protocol document pair for the Extranet API.
+  source: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+onboarding:
+  rfq: >-
+    "To access the APIs, create an API enabled user in CBRICS system" — enablement runs through the
+    CBRICS member system, not through a developer signup.
+  data_products: >-
+    NSE market data is licensed separately through NSE Data & Analytics Ltd under a data-vending
+    agreement, via a subscription inquiry form and published domestic/international tariff PDFs.
+test_credentials: null
+test_fixtures: null
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+  - {url: 'https://bricsonline.nseindia.com/rfq', http_status: 200}
+  - {url: 'https://eofs.nseindia.com/api/', http_status: 404, note: 'live JSON API host; returns a JSON error envelope with a requestId'}
+  - {url: 'https://bricsonlinereguat.nseindia.com/rfq/', http_status: 0, note: 'UAT hostname does not resolve from the public internet'}
+  - {url: 'https://eofsuat.nseindia.com/api/', http_status: 404, note: 'UAT host resolves and answers with a JSON error envelope'}

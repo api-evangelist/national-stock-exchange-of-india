@@ -1,0 +1,56 @@
+generated: '2026-08-04'
+method: searched
+source: 'RFQ - Protocol for Web API v1.1.10 (PDF), "Callbacks API"; OFS-WEB API v1.3.4 (PDF)'
+docs: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+spec_type: none
+note: >-
+  NSE publishes no AsyncAPI document. It does document a real event surface in its Web API protocol
+  PDFs — an outbound HTTPS callback for RFQ notifications and a server-side message stream for OFS —
+  plus the multicast tick-by-tick (MTBT) market-data broadcast protocols. Captured here as a webhook
+  / event catalog; nothing below is modelled beyond what NSE's own documents state.
+webhooks:
+- name: rfq-notification-callback
+  api: NSE RFQ Web API
+  direction: outbound (Exchange -> participant)
+  method: POST
+  path: <participant-base-url>/v1/notification
+  transport: HTTPS (participant-supplied base URL, must be reachable on the public internet)
+  content_type: application/json
+  registration: >-
+    The participant registers a callback base URL with the Exchange; it may differ from the base
+    URL registered for CBRICS callbacks. Callbacks are optional.
+  signature:
+    algorithm: HMAC-SHA256
+    encoding: hex
+    payload: the request JSON body
+    header: token
+  payload_fields:
+  - {name: rfqList, type: List<RFQ Master>, description: 'RFQ master records; same structure as the response of POST /rest/v1/rfqmaster/add/isin'}
+  - {name: negotiationList, type: List<Negotiation>, description: 'negotiation records; same structure as the response of POST /rest/v1/negotiation/add'}
+  - {name: dealAmendList, type: List<DealAmendment>, description: 'deal amendment records; same structure as the response of POST /rest/v1/dealamend/modifycancel (added in v1.1.9)'}
+- name: cbrics-notification-callback
+  api: NSE CBRICS Web API
+  direction: outbound (Exchange -> participant)
+  transport: HTTPS (participant-supplied base URL)
+  note: >-
+    Referenced by the RFQ protocol document as a separate registered callback base URL; the message
+    catalog is documented in WEB_CBRICS_PROTOCOL (PDF) and is not restated here.
+streams:
+- name: ofs-message-stream
+  api: NSE Offer For Sale (OFS) Web API
+  method: GET
+  path: /messaging/message-stream
+  direction: server -> client
+  note: Documented in OFS-WEB API v1.3.4 as the messaging stream for OFS market/order messages.
+broadcast_protocols:
+- name: MTBT (Multicast Tick-By-Tick)
+  segments: [Capital Market, Futures & Options, Currency Derivatives, Commodity Derivatives]
+  format: binary multicast, documented in versioned PDF/ZIP protocol documents
+  docs: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+- name: Exchange Drop Copy facility
+  segments: [Capital Market, Futures & Options, Currency Derivatives, Commodity Derivatives]
+  format: binary, documented as "Drop Copy - Normal protocol" PDFs
+  docs: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+gaps:
+- No AsyncAPI document is published for any of the above.
+- No event-type registry, retry policy, delivery guarantee or replay contract is documented for the RFQ callback.

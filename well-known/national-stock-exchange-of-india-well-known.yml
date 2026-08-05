@@ -1,0 +1,38 @@
+generated: '2026-08-04'
+method: probed
+source: live HTTPS probes of every NSE host in apis.yml
+note: >-
+  Every /.well-known/ discovery document was probed on all four public NSE hosts and none exist.
+  No document was found, so no WellKnown or SecurityTxt pointer is wired into apis.yml — this file
+  is the negative record of the probe so a later run does not repeat it blindly.
+results:
+- host: https://www.nseindia.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://api.nseindia.com
+  note: hostname resolves and terminates TLS but the root is served by an Akamai bot manager (HTTP 403)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://bricsonline.nseindia.com
+  documents:
+  - {path: /.well-known/agent-card.json, status: 403}
+- host: https://eofs.nseindia.com
+  documents:
+  - {path: /.well-known/agent-card.json, status: 404}
+x-evidence:
+  fetched: '2026-08-04'
+  http_status_all: [403, 404]

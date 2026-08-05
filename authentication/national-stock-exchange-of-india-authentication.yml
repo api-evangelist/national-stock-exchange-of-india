@@ -1,0 +1,63 @@
+generated: '2026-08-04'
+method: searched
+source: NSE trading protocol documents (PDF) published at https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+docs: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+note: >-
+  NSE publishes no OpenAPI, so no securityScheme could be derived. Every scheme below was read
+  directly out of NSE's own published protocol PDFs. All NSE interfaces are member/participant
+  interfaces: credentials are issued by the Exchange to an enabled member user, there is no
+  self-service sign-up and there is no OAuth 2.0 or OpenID Connect anywhere in the surface.
+summary:
+  types: [http, apiKey, mutualTLS]
+  api_key_in: [header]
+  oauth2_flows: []
+  oauth2: false
+  oidc: false
+  self_service_signup: false
+schemes:
+- name: rfq-login-session
+  api: NSE RFQ Web API
+  type: apiKey
+  in: header
+  parameter_name: loginKey
+  description: >-
+    POST /rest/v1/login exchanges member credentials for a session token; the token is sent on
+    every subsequent call in the `loginKey` header. A second login with the same credentials
+    expires the older session, and an idle session expires after a fixed interval (HTTP 401).
+  source: RFQ - Protocol for Web API v1.1.10 (PDF), "General Instructions" and "Login API"
+- name: rfq-callback-signature
+  api: NSE RFQ Web API (callbacks)
+  type: apiKey
+  in: header
+  parameter_name: token
+  description: >-
+    Outbound RFQ notification callbacks are authenticated to the participant by an HMAC-SHA256
+    of the request JSON payload, hex-encoded and sent in the `token` header. The participant
+    callback base URL must be HTTPS and is registered with the Exchange.
+  source: RFQ - Protocol for Web API v1.1.10 (PDF), "Callbacks API"
+- name: ofs-access-token
+  api: NSE Offer For Sale (OFS) Web API
+  type: http
+  scheme: bearer
+  in: header
+  parameter_name: Authorization
+  description: >-
+    POST /auth/token issues an accessToken for valid member credentials; POST /auth/refreshToken
+    renews it. The token value is sent in the `Authorization` header on every call except the
+    login API.
+  source: OFS-WEB API v1.3.4 (PDF), "General Instructions" / "POST /auth/token"
+- name: nse-rfq-fix-mtls
+  api: NSE RFQ FIX Interface (FIX 5.0 SP2 / FIXT.1.1)
+  type: mutualTLS
+  description: >-
+    The FIX gateway session is encrypted with SSL/TLS and client certificate authentication is
+    enabled — participant applications must present a valid certificate during the SSL handshake,
+    in addition to the FIX Logon (A) message credentials.
+  source: NSE RFQ - FIX Interface Protocol v1.0.2 (PDF), "Connection & Session Management"
+- name: nnf-member-credentials
+  api: Non-NEAT Front-End (NNF) trading protocol
+  type: proprietary
+  description: >-
+    The binary NNF / Drop Copy / MTBT trading protocols authenticate with Exchange-issued member
+    user IDs over dedicated connectivity (leased line, colocation, extranet). Not an HTTP scheme.
+  source: NSE Trading Protocols page (PDF/ZIP protocol documents)

@@ -1,0 +1,75 @@
+generated: '2026-08-04'
+method: searched
+source: NSE published protocol documents + live TLS/DNS probes
+docs: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+note: >-
+  Assessed against NSE's own published protocol documents and probes of its live hosts. NSE is a
+  SEBI-regulated market infrastructure institution, but it publishes no trust centre and names no
+  security certification (SOC 2, ISO 27001, PCI DSS) on any public page we could reach — so no
+  Compliance pointer is wired.
+standards:
+- id: fix-5.0-sp2
+  conforms: true
+  evidence: >-
+    "This document describes the implementation of the FIX 5.0 protocol (SP2) for National Stock
+    Exchange" — NSE RFQ - FIX Interface Protocol v1.0.2, Introduction.
+- id: fixt-1.1
+  conforms: true
+  evidence: 'Session-layer BeginString "Must be FIXT.1.1 for Session Messages" — NSE RFQ FIX Interface Protocol v1.0.2.'
+- id: mutual-tls
+  conforms: true
+  evidence: >-
+    "Client certificate authentication will be enabled on the FIX gateway. Client applications will
+    have to present a valid certificate during SSL handshake" — NSE RFQ FIX Interface Protocol v1.0.2.
+- id: tls-1.3
+  conforms: true
+  evidence: 'Live TLS probe: www.nseindia.com, bricsonline.nseindia.com and eofs.nseindia.com all negotiate TLSv1.3.'
+- id: hmac-sha256-webhook-signing
+  conforms: true
+  evidence: 'RFQ callback signature is "HmacSHA256 of the Request JSON payload ... encoded using HEX" in the `token` header — RFQ Protocol for Web API v1.1.10.'
+- id: json
+  conforms: true
+  evidence: All Web API request and response messages are application/json.
+- id: openapi
+  conforms: false
+  evidence: 'No OpenAPI/Swagger document at any NSE host; /openapi.json, /swagger.json, /v3/api-docs and /api-docs all 404 on api.nseindia.com, eofs.nseindia.com and www.nseindia.com.'
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document published for the RFQ callback, the OFS message stream or the MTBT broadcast protocols.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'Errors use a proprietary {code, messages[]} envelope, not application/problem+json.'
+- id: oauth2
+  conforms: false
+  evidence: No OAuth 2.0 anywhere in the surface; session/bearer tokens are issued by a proprietary login endpoint.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on every NSE host probed.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on www.nseindia.com and api.nseindia.com.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset/Deprecation header support or deprecation policy is documented.
+- id: rfc8615-well-known-uris
+  conforms: false
+  evidence: No /.well-known/ document of any kind is served (see well-known/ index).
+- id: a2a-agent-card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json 404 (or 403) on every NSE host probed.
+- id: dnssec
+  conforms: true
+  evidence: 'DNSKEY present for nseindia.com (probe-domain-security.py, 2026-08-04).'
+- id: dmarc
+  conforms: true
+  evidence: 'DMARC published with policy "reject" for nseindia.com.'
+- id: caa
+  conforms: true
+  evidence: 'CAA records present for nseindia.com (letsencrypt.org, pki.goog, digicert, amazon).'
+- id: hsts
+  conforms: partial
+  evidence: 'eofs.nseindia.com sends HSTS max-age=31536000; www.nseindia.com and bricsonline.nseindia.com do not.'
+regulatory_context:
+- regime: SEBI (Securities and Exchange Board of India)
+  role: NSE is a SEBI-recognised stock exchange; NSE Clearing is a recognised clearing corporation.
+  note: Regulatory recognition, not an API conformance claim.

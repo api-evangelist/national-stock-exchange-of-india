@@ -1,0 +1,72 @@
+generated: '2026-08-04'
+method: searched
+source: NSE trading protocol documents (PDF) published at https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+docs: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+scope: >-
+  Cross-cutting request/response semantics for NSE's JSON/HTTPS Web APIs (RFQ, CBRICS, OFS),
+  read verbatim out of NSE's published protocol PDFs. NSE ships no OpenAPI, so nothing here is
+  derived from a machine-readable contract.
+authentication:
+  style: session token / bearer token, Exchange-issued member credentials
+  rfq: POST /rest/v1/login returns a token sent in the `loginKey` header on all later calls
+  ofs: POST /auth/token returns an accessToken sent in the `Authorization` header; POST /auth/refreshToken renews it
+  see: authentication/national-stock-exchange-of-india-authentication.yml
+media_type:
+  request: application/json
+  response: application/json
+  header: Content-Type must be application/json on every POST
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key, request-replay window or de-duplication contract is documented in any NSE
+    Web API protocol document. Order/quote uniqueness is carried by business identifiers
+    (ClOrdId in FIX, RFQ number / negotiation number in the Web APIs), not by an idempotency key.
+pagination:
+  supported: false
+  note: >-
+    List operations (POST /rest/v1/negotiation/all, /rest/v1/isins/all, /rest/v1/dealamend/all, …)
+    take filter fields in the request JSON and return the full matching list. No cursor, offset,
+    page-size or next-link convention is documented.
+naming:
+  urls: all API URLs are always lower case
+  fields: camelCase JSON field names ("orderNumber", "firstName")
+  null_fields: keys with null values may be omitted from the JSON
+encoding:
+  path_and_query: percent-encoded
+  numbers: no thousands separator; "." is the decimal indicator; default max 18 digits
+  decimals: declared with a whole-part length and a decimal-part length
+  booleans: true / false
+date_time:
+  timezone: Indian Standard Time (IST)
+  date: dd-MMM-yyyy (e.g. 01-Jan-2018)
+  time: hh24:mm:ss
+  datetime: dd-MMM-yyyy hh24:mm:ss (e.g. 01-Jan-2016 15:30:00)
+  transport: all dates/times are transported as strings
+versioning:
+  style: uri-path
+  current: /rest/v1/ (RFQ, CBRICS)
+  document_versioning: >-
+    The contract itself is versioned as a PDF revision history (RFQ Web API v1.1.10, OFS Web API
+    v1.3.4, CBRICS Web API v1.16); the URI version has stayed at v1 across those revisions,
+    including at least one breaking path rename.
+  see: changelog/national-stock-exchange-of-india-changelog.yml
+error_envelope:
+  shape: '{ "code": <http status>, "messages": [ <string> | { "field": <name>, "msg": <message> } ] }'
+  validation_levels: >-
+    Level 1 validates JSON structure and accumulates every field error into one response using the
+    field/msg structure; level 2 validates functional rules and fails fast on the first violation.
+  see: errors/national-stock-exchange-of-india-problem-types.yml
+request_tracing:
+  correlation_header: null
+  note: >-
+    No client-supplied request-id convention is documented. The OFS API host does return a
+    `requestId` in its own JSON error body (observed on a live 404 from https://eofs.nseindia.com/api/).
+rate_limit_signaling:
+  documented: false
+  note: No rate-limit headers, quotas or throttling contract are published for the Web APIs.
+events:
+  webhooks: RFQ notification callbacks (POST <clientbaseurl>/v1/notification), HMAC-SHA256 signed
+  streaming: OFS GET /messaging/message-stream
+  see: asyncapi/national-stock-exchange-of-india-webhooks.yml
+environments:
+  see: sandbox/national-stock-exchange-of-india-sandbox.yml

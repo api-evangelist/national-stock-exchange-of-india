@@ -1,0 +1,59 @@
+generated: '2026-08-04'
+method: searched
+source: npm, PyPI and the NSE trading protocols page
+official_sdk_count: 0
+note: >-
+  NSE publishes NO first-party client library in any language and no public source repository —
+  npm, PyPI, Maven Central, NuGet, pkg.go.dev, RubyGems, Packagist and crates.io were searched and
+  there is no NSE-authored package. Members implement the published binary/JSON protocol documents
+  directly, or buy front-end software from Exchange-empanelled vendors and Application Service
+  Providers. The packages below are third-party, community-maintained scrapers of the undocumented
+  www.nseindia.com/api/* website endpoints — they are recorded for completeness and are explicitly
+  NOT first-party, so no `SDKs` pointer is wired in apis.yml.
+packages: []
+third_party_packages:
+- language: python
+  registry: pypi
+  name: nse
+  url: https://pypi.org/project/nse/
+  install: pip install nse
+  source: https://github.com/BennyThadikaran/NseIndiaApi
+  official: false
+  description: Unofficial Python API for NSE India.
+- language: python
+  registry: pypi
+  name: nsetools
+  url: https://pypi.org/project/nsetools/
+  install: pip install nsetools
+  source: https://github.com/vsjha18/nsetools
+  official: false
+  description: Unofficial realtime data client for NSE India.
+- language: python
+  registry: pypi
+  name: nsepython
+  url: https://pypi.org/project/nsepython/
+  install: pip install nsepython
+  official: false
+  description: Unofficial Python wrapper over NSE India website endpoints.
+- language: javascript
+  registry: npm
+  name: stock-nse-india
+  url: https://www.npmjs.com/package/stock-nse-india
+  install: npm install stock-nse-india
+  source: https://github.com/hi-imcodeman/stock-nse-india
+  official: false
+  description: Unofficial Node.js package and API server for NSE India equity/index data.
+- language: typescript
+  registry: npm
+  name: nse-bse-api
+  url: https://www.npmjs.com/package/nse-bse-api
+  install: npm install nse-bse-api
+  source: https://github.com/bshada/nse-bse-api
+  official: false
+  description: Unofficial unified TypeScript client for NSE and BSE India.
+vendor_channel:
+  note: >-
+    NSE's supported integration path for trading is an empanelled vendor / Application Service
+    Provider front end, or an in-house Non-NEAT Front-End built against the published NNF protocol
+    documents. Market data is licensed through NSE Data & Analytics Ltd.
+  docs: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols

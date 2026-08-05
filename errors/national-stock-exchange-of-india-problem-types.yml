@@ -1,0 +1,41 @@
+generated: '2026-08-04'
+method: searched
+source: 'RFQ - Protocol for Web API v1.1.10 (PDF), "Common Error Response"'
+docs: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
+format: proprietary-json
+note: >-
+  NSE does not use RFC 9457 problem+json. All NSE Web APIs share a single proprietary error
+  envelope carried with the HTTP status code. This catalog is the documented status-code set —
+  NSE publishes no enumerated application error-code registry for the Web APIs.
+envelope:
+  content_type: application/json
+  fields:
+  - {name: code, type: number, description: HTTP status code, repeated below}
+  - {name: messages, type: array, description: 'either an array of strings (rule-validation failures) or an array of field-error structures (JSON parse/field validation)'}
+  field_error_structure:
+  - {name: field, type: string(100), description: input JSON field name}
+  - {name: msg, type: string(100), description: field validation error message}
+  examples:
+  - '{"code":400,"messages":["Access Denied"]}'
+  - '{"code":400,"messages":[{"msg":"Participants: No of items in the list should be greater than or equal to 1","field":"participantList"}]}'
+problems:
+- status: 400
+  title: Validation or business logic error
+  description: >-
+    Indicates a validation / business-logic error. Structural and field-level failures are
+    accumulated and returned together; functional-rule failures fail fast on the first violation.
+  remediation: Correct the offending JSON field(s) named in messages[].field and resubmit.
+- status: 401
+  title: Session not established or expired
+  description: >-
+    The login session is not established or has expired. Creating a second session with the same
+    credentials expires the older session, and an idle session expires after a predefined interval.
+  remediation: Call POST /rest/v1/login (RFQ) or POST /auth/refreshToken (OFS) and retry with the new token.
+- status: 404
+  title: Resource does not exist
+  description: The addressed resource does not exist.
+  remediation: Verify the path — all NSE Web API URLs are lower case and percent-encoded.
+- status: 500
+  title: Application error
+  description: Any other application error.
+  remediation: Report to the NSE support desk; these are not client-correctable.
