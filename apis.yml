@@ -27,6 +27,17 @@ tags:
 - Capital Markets
 - Market Data
 - Trading
+- Financial-Services
+- Securities
+- India
+- FIX Protocol
+- Bonds
+tags_raw:
+- Company
+- Stock Exchange
+- Capital Markets
+- Market Data
+- Trading
 - Financial Services
 - Securities
 - India
@@ -74,6 +85,10 @@ apis:
   humanURL: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
   baseURL: https://eofs.nseindia.com/api/
   tags:
+  - Offer For Sale
+  - Order
+  - Equities
+  tags_raw:
   - Offer For Sale
   - Orders
   - Equities
