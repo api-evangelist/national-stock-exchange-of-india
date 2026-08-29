@@ -12,6 +12,17 @@ description: 'National Stock Exchange of India Ltd (NSE) is India''s largest sto
   AsyncAPI, SDK, Postman collection or machine-readable contract of any kind. Market data itself is
   vended commercially by NSE Data & Analytics under a subscription and data-vending agreement.'
 url: https://raw.githubusercontent.com/api-evangelist/national-stock-exchange-of-india/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.nseindia.com/assets/images/NSE_Logo.svg
 x-type: company
 x-source: harvest:secondary-market
