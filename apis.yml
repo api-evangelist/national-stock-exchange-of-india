@@ -52,7 +52,7 @@ tags:
 - Capital Markets
 - Market Data
 - Trading
-- Financial-Services
+- Financial Services
 - Securities
 - India
 - FIX Protocol
@@ -68,6 +68,7 @@ tags_raw:
 - India
 - FIX Protocol
 - Bonds
+- Financial-Services
 apis:
 - name: NSE RFQ Web API
   description: 'JSON over HTTPS Web API for the NSE Request-for-Quote (RFQ) platform for corporate
