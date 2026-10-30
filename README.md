@@ -64,5 +64,99 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-National Stock Exchange of India is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.hiive.com/securities/national-stock-exchange-of-india-stock
+National Stock Exchange of India Ltd (NSE) is India's largest stock exchange, operating the Capital Market, Futures & Options, Currency Derivatives, Commodity Derivatives, Debt and Electronic Gold Receipts segments, together with NSE Clearing, NSE Indices and NSE Data & Analytics Ltd (formerly DotEx International). NSE exposes its trading and post-trade systems to members and empanelled vendors through a published protocol surface rather than a public developer portal: binary Non-NEAT Front-End (NNF) and multicast tick-by-tick (MTBT) trading protocols, a Drop Copy facility, an Extranet API, a FIX 5.0 (SP2) interface for the RFQ platform, and JSON/HTTPS Web APIs for the RFQ, CBRICS bond, e-IPO/ASBA, Offer-For-Sale and MFSS platforms. Every one of those interfaces is documented only as a PDF or ZIP protocol document — NSE publishes no OpenAPI, AsyncAPI, SDK, Postman collection or machine-readable contract of any kind. Market data itself is vended commercially by NSE Data & Analytics under a subscription and data-vending agreement.
+
+**Areas:** Company · Stock Exchange · Capital Markets · Market Data · Trading · Financial Services · Securities · India · FIX Protocol · Bonds
+
+## National Stock Exchange of India on APIs.io
+
+Everything profiled for National Stock Exchange of India is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/national-stock-exchange-of-india/](https://apis.io/providers/national-stock-exchange-of-india/)** — or go straight to one of the APIs or properties below.
+
+### APIs (3)
+
+- [NSE RFQ Web API](https://apis.io/apis/national-stock-exchange-of-india/nse-rfq-web-api/) — JSON over HTTPS Web API for the NSE Request-for-Quote (RFQ) platform for corporate bonds and debt securities. Documented in the "RFQ - Protocol for Web API"…
+- [NSE CBRICS Web API](https://apis.io/apis/national-stock-exchange-of-india/nse-cbrics-web-api/) — JSON over HTTPS Web API for CBRICS (Corporate Bond Reporting and Integrated Clearing System), NSE's reporting and settlement platform for corporate bond…
+- [NSE Offer For Sale (OFS) Web API](https://apis.io/apis/national-stock-exchange-of-india/nse-offer-for-sale-ofs-web-api/) — JSON over HTTPS Web API for the NSE Offer-For-Sale platform, used by members to place, modify, cancel and query OFS orders and to stream market messages.…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [National Stock Exchange Of India Webhooks](https://apis.io/asyncapis/national-stock-exchange-of-india/national-stock-exchange-of-india-webhooks/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [National Stock Exchange Of India Authentication](https://apis.io/security/national-stock-exchange-of-india/national-stock-exchange-of-india-authentication/)
+- [National Stock Exchange Of India Domain Security](https://apis.io/security/national-stock-exchange-of-india/national-stock-exchange-of-india-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.nseindia.com/)
+- [Documentation](https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols)
+- [API reference](https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols)
+- [Pricing](https://www.nseindia.com/static/nse-data-and-analytics/data-information-vending)
+- [Support](https://www.nseindia.com/static/list-contact-us)
+- [Changelog](https://www.nseindia.com/resources/exchange-communication-circulars)
+- [Terms of service](https://www.nseindia.com/static/nse-terms-of-use)
+- [Privacy policy](https://www.nseindia.com/static/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 30.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 15.8 |
+
+**Agent readiness 22.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 19.4** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/national-stock-exchange-of-india/](https://apis.io/providers/national-stock-exchange-of-india/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for National Stock Exchange of India: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/national-stock-exchange-of-india/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
